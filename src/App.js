@@ -2,15 +2,25 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Post from './components/Post';
+import Posts from './components/Posts';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from "react-apollo";
 
-class App extends Component {
-  render() {
-    return <div className="App">
+const client = new ApolloClient({
+  uri: "http://localhost:4000/graphql"
+});
+
+const App = () => {
+  return (
+    <ApolloProvider client={client}>
+      <div className="App">
         <Header />
+        <img src="./avatar.jpg"></img>
         <section className="App-main">
-          <Post nickname="Pahul" avatar="https://www.laravelnigeria.com/img/chris.jpg" caption="first commit!" image="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Mark_Zuckerberg_F8_2018_Keynote_%28cropped%29.jpg/330px-Mark_Zuckerberg_F8_2018_Keynote_%28cropped%29.jpg" />
+          <Posts />
         </section>
-      </div>;
-  }
-}
+      </div>
+    </ApolloProvider>
+  );
+};
 export default App;
